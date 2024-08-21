@@ -20,3 +20,6 @@ CREATE TABLE IF NOT EXISTS public.homes
     year integer,
     CONSTRAINT homes_pkey PRIMARY KEY (id)
 );
+
+ALTER SEQUENCE public.homes_id_seq
+    OWNED BY public.homes.id;
