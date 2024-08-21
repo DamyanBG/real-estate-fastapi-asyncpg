@@ -40,6 +40,6 @@ async def login_user(credentials: CredentialsReq, db: AsyncSession = Depends(get
         )
 
     access_token = create_access_token(existing_user.id)
-    response = TokenResp(acces_token=access_token)
+    response = TokenResp(access_token=access_token)
 
     return response
