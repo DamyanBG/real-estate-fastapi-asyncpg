@@ -10,6 +10,6 @@ class HomeModel(Base):
     title = Column(String(150), nullable=False)
     city = Column(String(150), nullable=False)
     neighborhood = Column(String(255), nullable=False)
-    address = Column(String(255))
+    address = Column(String(255), nullable=False)
     price = Column(Integer)
     year = Column(Integer)
