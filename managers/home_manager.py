@@ -3,6 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from models.home_model import HomeModel
 from schemas.home_schemas import Home, HomeCreate
 
+
 class HomeManager:
     @staticmethod
     async def insert_home(home_data: HomeCreate, db: AsyncSession) -> Home:

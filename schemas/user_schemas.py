@@ -20,7 +20,7 @@ class UserPassword(BaseModel):
 
 
 class UserCreate(UserBase, UserPassword, UserRoleAuth):
-    pass 
+    pass
 
 
 class User(UserBase):

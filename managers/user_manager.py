@@ -6,6 +6,7 @@ from sqlalchemy import select
 from models.user_model import UserModel
 from schemas.user_schemas import User, UserCreate
 
+
 class UserManager:
     @staticmethod
     async def insert_user(user_data: UserCreate, db: AsyncSession) -> User:
