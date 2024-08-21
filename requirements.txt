@@ -2,6 +2,7 @@ asyncpg==0.29.0
 email_validator==2.2.0
 fastapi==0.112.1
 pydantic==2.8.2
+pyjwt==2.9.0
 python-dotenv==1.0.1
 SQLAlchemy==2.0.32
 uvicorn==0.30.6
