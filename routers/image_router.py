@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Security, HTTPException, status, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from schemas.image_schemas import ImageCreate, ImageWithUrl
+from schemas.image_schemas import ImageBase64, TempImageWithUrl
 from auth.token import verify_token
 from utils.image_compression import compress_image_to_webp
 from utils.utils import separate_data_url_from_base64
@@ -16,10 +16,10 @@ image_router = APIRouter(prefix="/images", tags=["images"])
 @image_router.post(
     "/",
     dependencies=[Security(verify_token)],
-    response_model=ImageWithUrl,
+    response_model=TempImageWithUrl,
     status_code=status.HTTP_201_CREATED,
 )
-async def post_image(image_data: ImageCreate, db: AsyncSession = Depends(get_db)):
+async def post_image(image_data: ImageBase64, db: AsyncSession = Depends(get_db)):
     base64_data = image_data.photo_base64
     image_bytes = compress_image_to_webp(separate_data_url_from_base64(base64_data)[1])
 
@@ -29,7 +29,7 @@ async def post_image(image_data: ImageCreate, db: AsyncSession = Depends(get_db)
         )
 
     img_file_name_str = upload_bytes_image(image_bytes)
-    image = await ImageManager.insert_image(img_file_name_str, db)
+    image = await ImageManager.insert_temp_image(img_file_name_str, db)
     signed_url = await async_generate_signed_url(img_file_name_str)
-    image_with_url = ImageWithUrl(url=signed_url, **image.model_dump())
+    image_with_url = TempImageWithUrl(url=signed_url, **image.model_dump())
     return image_with_url

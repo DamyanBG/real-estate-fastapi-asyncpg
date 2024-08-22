@@ -23,14 +23,14 @@ def check_is_safe_image(image: Image, client: ImageAnnotatorClient) -> bool:
     return True
 
 
-def check_contains_cat(image: Image, client: ImageAnnotatorClient) -> bool:
-    label_response = client.label_detection(image=image)
-    labels = label_response.label_annotations
-    for label in labels:
-        if "cat" in label.description.lower():
-            return True
+# def check_contains_cat(image: Image, client: ImageAnnotatorClient) -> bool:
+#     label_response = client.label_detection(image=image)
+#     labels = label_response.label_annotations
+#     for label in labels:
+#         if "cat" in label.description.lower():
+#             return True
 
-    return False
+#     return False
 
 
 def check_is_safe_and_contains_cat(image_content: bytes) -> bool:
@@ -38,9 +38,10 @@ def check_is_safe_and_contains_cat(image_content: bytes) -> bool:
     image = Image(content=image_content)
 
     is_safe = check_is_safe_image(image, client)
-    contains_cat = check_contains_cat(image, client)
+    # contains_cat = check_contains_cat(image, client)
 
-    is_safe_and_contains_cat = is_safe and contains_cat
+    # is_safe_and_contains_cat = is_safe and contains_cat
+    is_safe_and_contains_cat = is_safe
 
     print(is_safe_and_contains_cat)
 

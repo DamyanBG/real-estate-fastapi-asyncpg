@@ -1,11 +1,11 @@
 from pydantic import BaseModel, ConfigDict
 
 
-class ImageCreate(BaseModel):
+class ImageBase64(BaseModel):
     photo_base64: str
 
 
-class Image(BaseModel):
+class TempImage(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
@@ -16,5 +16,5 @@ class ImageUrl(BaseModel):
     url: str 
 
 
-class ImageWithUrl(Image, ImageUrl):
+class TempImageWithUrl(TempImage, ImageUrl):
     pass
